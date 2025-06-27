@@ -1,10 +1,11 @@
 "use client";
 import { FormEvent, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function ApplyPage() {
   const { nctId } = useParams();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -12,6 +13,7 @@ export default function ApplyPage() {
     email: "",
     agree: false,
   });
+
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -52,6 +54,16 @@ export default function ApplyPage() {
   return (
     <main className="min-h-screen p-6 max-w-lg mx-auto bg-white rounded-xl shadow-md mt-6">
       <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="flex justify-start">
+          <button
+            type="button"
+            onClick={() => router.push("/")}
+            className="text-blue-600 hover:underline font-semibold mb-2"
+          >
+            ← Back to Search
+          </button>
+        </div>
+
         <div>
           <label
             htmlFor="firstName"
