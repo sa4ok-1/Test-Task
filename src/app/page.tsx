@@ -21,27 +21,30 @@ export default function Home() {
   }, [input]);
 
   useEffect(() => {
-    if (!queryParam) return;
+    const delayDebounce = setTimeout(() => {
+      if (!input) return;
+      router.push(`/?q=${encodeURIComponent(input)}`);
+      fetchStudies(input);
+    }, 500);
 
-    const fetchStudies = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(
-          `https://clinicaltrials.gov/api/v2/studies?query.cond=${queryParam}&countTotal=true&fields=protocolSection.identificationModule.nctId,protocolSection.identificationModule.briefTitle,protocolSection.conditionsModule.conditions&pageSize=10`,
-          { cache: "no-store" }
-        );
-        const data = await res.json();
-        setStudies(data.studies || []);
-      } catch (e) {
-        console.error("Failed to fetch studies", e);
-      } finally {
-        setLoading(false);
-      }
-    };
+    return () => clearTimeout(delayDebounce);
+  }, [input]);
 
-    fetchStudies();
-  }, [queryParam]);
-
+  const fetchStudies = async (query: string) => {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `https://clinicaltrials.gov/api/v2/studies?query.cond=${query}&countTotal=true&fields=protocolSection.identificationModule.nctId,protocolSection.identificationModule.briefTitle,protocolSection.conditionsModule.conditions&pageSize=10`,
+        { cache: "no-store" }
+      );
+      const data = await res.json();
+      setStudies(data.studies || []);
+    } catch (e) {
+      console.error("Failed to fetch studies", e);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <main className="min-h-screen bg-gray-100 px-4 py-8">
       <div className="max-w-2xl mx-auto">
