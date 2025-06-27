@@ -3,6 +3,7 @@
 A responsive Next.js SSR app for searching clinical trials and submitting applications.
 
 ## 🔧 Tech Stack
+
 - **Next.js** (App Router, SSR)
 - **TypeScript**
 - **TailwindCSS**
@@ -10,27 +11,25 @@ A responsive Next.js SSR app for searching clinical trials and submitting applic
 - **Vercel**
 
 ## 🚀 Features
+
 - SSR search page for clinical trials
 - Application form with validation and MongoDB storage
 - Responsive UI optimized for mobile
 
 ## 📦 Installation
+
 ```bash
-git clone https://github.com/your-user/clinical-trials-app.git
-cd clinical-trials-app
+git clone https://github.com/sa4ok-1/Test-Task.git
+cd Test-Task
 npm install
 ```
 
-## 🔐 Environment Variables
-```
-MONGODB_URI=your_mongodb_uri
-```
-
 ## 💻 Run Locally
+
 ```bash
 npm run dev
 ```
 
 ## 🔗 Live Demo
-- GitHub: 
-- Vercel: 
+
+- Vercel: https://test-task-491j.vercel.app/
